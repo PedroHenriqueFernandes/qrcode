@@ -1,0 +1,9 @@
+body{
+    background-color: gray;
+}
+
+#input{
+    text-align: center;
+    vertical-align: center;
+    cursor: pointer;
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/style.css">
+    <title>Gerador de QRCODE</title>
+</head>
+
+<body>
+    <h1>
+        Siga estes passos:
+    </h1>
+
+    <ol>
+        <li>
+            Upe o arquivo no google drive
+        </li>
+        <li>
+            Dentro do Google Drive, clique com o botão direito sobre o arquivo upado.
+        </li>
+        <li>
+            Clique em "Gerar Link"
+        </li>
+        <li>
+            Copie o link gerado e cole aqui no campo "Digite aqui o link do arquivo"
+        </li>
+        <li>Clique em enviar</li>
+        <li>Copie o link gerado e cole no navegador</li>
+    </ol>
+    <hr color="black">
+    <br>
+    <div id="input">
+        <input id="link" type="text" placeholder="Digite aqui o link do arquivo">
+        <button id="enviar">Enviar</button>
+        <button id="limpar">Limpar</button>
+    </div>
+    </div>
+    <br>
+    <div id='Resultado'>
+
+    </div>
+
+    <script>
+        let link = 'https://api.qr-code-generator.com/v1/create?access-token=-UbpCaXVJnYyfNYrnqPrBFxrQQd7cc25uMWUKHw0Lyc9PF8Sou4WfWSklS6s1t_3'
+        let res, windows
+
+        const input = document.getElementById('link')
+        const Resultado = document.getElementById('Resultado')
+
+        /*function montarLink() {
+            res = 'O Link para o seu QRCode é: \n'
+            linkDigitado = input.value
+            res += link + linkDigitado
+            windows = link + linkDigitado
+            Resultado.textContent = res
+            input.value = ""
+            window.open(windows)
+        }
+
+        enviar.addEventListener('click', montarLink)*/
+
+        function fazPost(url, body) {
+            console.log("Body=", body)
+            let request = new XMLHttpRequest()
+            request.open("POST", url, true)
+            request.setRequestHeader("Content-type", "application/json")
+            request.send(JSON.stringify(body))
+
+            request.onload = function () {
+                console.log(this.response)
+            }
+
+            return request.response
+        }
+
+        enviar.addEventListener('click', geraqrcode)
+
+        function geraqrcode() {
+            event.preventDefault()
+            let url = "https://api.qr-code-generator.com/v1/create?access-token=-UbpCaXVJnYyfNYrnqPrBFxrQQd7cc25uMWUKHw0Lyc9PF8Sou4WfWSklS6s1t_3"
+
+            console.log(link)
+
+            body = {
+                "frame_name": "bottom-frame",
+                "qr_code_text": "link",
+                "image_format": "SVG",
+                "frame_color": "#02bfff",
+                "frame_text_color": "#ffffff",
+                "frame_icon_name": "mobile",
+                "frame_text": "Scan me",
+                "marker_left_template": "version13",
+                "marker_right_template": "version13",
+                "marker_bottom_template": "version13"
+            }
+
+            fazPost(url, body)
+        }
+    </script>
+</body>
+
+</html>
