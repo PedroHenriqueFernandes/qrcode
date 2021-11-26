@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +7,6 @@
     <link rel="stylesheet" href="./styles/style.css">
     <title>Gerador de QRCODE</title>
 </head>
-
 <body>
     <h1>
         Siga estes passos:
@@ -33,73 +31,34 @@
     <hr color="black">
     <br>
     <div id="input">
-        <input id="link" type="text" placeholder="Digite aqui o link do arquivo">
+        <input id = "link" type="text" placeholder="Digite aqui o link do arquivo">
         <button id="enviar">Enviar</button>
         <button id="limpar">Limpar</button>
     </div>
     </div>
     <br>
     <div id='Resultado'>
-
+        
     </div>
 
     <script>
-        let link = 'https://api.qr-code-generator.com/v1/create?access-token=-UbpCaXVJnYyfNYrnqPrBFxrQQd7cc25uMWUKHw0Lyc9PF8Sou4WfWSklS6s1t_3'
+        let link = 'https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data='
         let res, windows
 
         const input = document.getElementById('link')
         const Resultado = document.getElementById('Resultado')
 
-        /*function montarLink() {
-            res = 'O Link para o seu QRCode é: \n'
+        function montarLink(){
+            res = 'O Link para o seu QRCode é: \n' 
             linkDigitado = input.value
-            res += link + linkDigitado
-            windows = link + linkDigitado
+            res += link+linkDigitado
+            windows = link+linkDigitado
             Resultado.textContent = res
             input.value = ""
             window.open(windows)
         }
 
-        enviar.addEventListener('click', montarLink)*/
-
-        function fazPost(url, body) {
-            console.log("Body=", body)
-            let request = new XMLHttpRequest()
-            request.open("POST", url, true)
-            request.setRequestHeader("Content-type", "application/json")
-            request.send(JSON.stringify(body))
-
-            request.onload = function () {
-                console.log(this.response)
-            }
-
-            return request.response
-        }
-
-        enviar.addEventListener('click', geraqrcode)
-
-        function geraqrcode() {
-            event.preventDefault()
-            let url = "https://api.qr-code-generator.com/v1/create?access-token=-UbpCaXVJnYyfNYrnqPrBFxrQQd7cc25uMWUKHw0Lyc9PF8Sou4WfWSklS6s1t_3"
-
-            console.log(link)
-
-            body = {
-                "frame_name": "bottom-frame",
-                "qr_code_text": "link",
-                "image_format": "SVG",
-                "frame_color": "#02bfff",
-                "frame_text_color": "#ffffff",
-                "frame_icon_name": "mobile",
-                "frame_text": "Scan me",
-                "marker_left_template": "version13",
-                "marker_right_template": "version13",
-                "marker_bottom_template": "version13"
-            }
-
-            fazPost(url, body)
-        }
+        enviar.addEventListener('click', montarLink)
     </script>
 </body>
-
 </html>
