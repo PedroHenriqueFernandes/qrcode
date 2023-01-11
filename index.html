@@ -1,63 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/style.css">
     <title>Gerador de QRCODE</title>
 </head>
 <body>
-    <h1>
-        Siga estes passos:
-    </h1>
-
-    <ol>
-        <li>
-            Upe o arquivo no google drive
-        </li>
-        <li>
-            Dentro do Google Drive, clique com o botão direito sobre o arquivo upado.
-        </li>
-        <li>
-            Clique em "Gerar Link"
-        </li>
-        <li>
-            Copie o link gerado e cole aqui no campo "Digite aqui o link do arquivo"
-        </li>
-        <li>Clique em enviar</li>
-        <li>Copie o link gerado e cole no navegador</li>
-    </ol>
-    <hr color="black">
-    <br>
-    <div id="input">
-        <input id = "link" type="text" placeholder="Digite aqui o link do arquivo">
-        <button id="enviar">Enviar</button>
-    </div>
+    <h1>Digite o link/texto que deseja gerar um QRCode</h1>
+    <form id="form">
+        <input id = "link" type="text" required placeholder="Digite aqui o link do arquivo">
+        <button id="enviar">CRIAR</button>
+    </form>
     </div>
     <br>
-    <div id='Resultado'>
+    <div id='generatedQRCode'>
         
     </div>
 
     <script>
         let link = 'https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data='
-        let res, windows
+        let qrCodeLink
 
-        const input = document.getElementById('link')
-        const Resultado = document.getElementById('Resultado')
+        const textToGenerateQRCode = document.getElementById('link')
+        const generatedQRCode = document.getElementById('generatedQRCode')
 
-        function montarLink(){
+        function linkConstructor(event){
+            if( textToGenerateQRCode.value == "" ){
+                return
+            }
             res = 'O Link para o seu QRCode é: \n' 
-            linkDigitado = input.value
-            res += link+linkDigitado
-            windows = link+linkDigitado
-            Resultado.textContent = res
-            input.value = ""
-            window.open(windows)
+            linkDigitado = textToGenerateQRCode.value
+            qrCodeLink = link+linkDigitado
+            generatedQRCode.textContent = "Link para o QRCode: " + qrCodeLink
+            textToGenerateQRCode.value = ""
+            window.open(qrCodeLink)
+            event.preventDefault()
         }
 
-        enviar.addEventListener('click', montarLink)
+        enviar.addEventListener('click', linkConstructor, false)
     </script>
 </body>
 </html>
